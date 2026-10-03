@@ -16,6 +16,12 @@ Esta especificação reúne, como **um programa de produtos manufaturados**, as 
 
 Conforme a constituição, materiais, processos e fornecedores **não são fixados nesta spec**. As alternativas citadas na visita (poliuretano, poliuretano + cerâmica, chapa "Rhino Hyde") ficam registradas como **alternativas de interesse do cliente**, para serem avaliadas no plano.
 
+## Clarifications
+
+### Session 2026-10-03
+
+- Q: O plano e as tarefas devem cobrir as 8 aplicações ou só as P1? → A: Plano detalhado só das P1 (S1 calha de descarga + S2 placas de desgaste); S3–S8 permanecem na spec como "aguardando dados do cliente" e entram no plano quando os dados chegarem.
+
 ## User Scenarios & Testing *(mandatory)*
 
 > Aqui "usuário" significa cliente, operador ou mantenedor da Concentradora 2. "Teste" significa inspeção, ensaio ou teste de campo.
@@ -241,7 +247,7 @@ Todo item vem com desenho, especificação de material, critério de troca, inst
 
 ## Assumptions
 
-- **Escopo**: um único programa de produtos para a Concentradora 2, com 8 user stories independentes. Cada story pode virar uma spec própria quando avançar para projeto detalhado.
+- **Escopo**: um único programa de produtos para a Concentradora 2, com 8 user stories independentes. **Nesta fase, o plano e as tarefas cobrem só as P1 (S1 e S2).** S3–S8 ficam com status "aguardando dados do cliente" e entram no plano (ou viram specs próprias) quando os desenhos, as dimensões ou a confirmação de equivalência chegarem.
 - **Vida útil** é medida em horas efetivas de operação ou em toneladas processadas. Quando o cliente só souber em meses de calendário (story 1), vale o regime de operação atual.
 - **Metas sem número no resumo** foram definidas por mim e devem ser confirmadas com o cliente: S2 ×1,5; S4 15 min / 30 dias; S7 ×1,25; S10 3 de 8 em 6 meses.
 - **Condições de operação** (minério, granulometria, % de sólidos, vazões, pressões, temperatura) ainda não foram informadas e dependem dos desenhos e dados que o cliente vai enviar.
