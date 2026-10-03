@@ -22,6 +22,7 @@ Conforme a constituição, materiais, processos e fornecedores **não são fixad
 
 - Q: O plano e as tarefas devem cobrir as 8 aplicações ou só as P1? → A: Plano detalhado só das P1 (S1 calha de descarga + S2 placas de desgaste); S3–S8 permanecem na spec como "aguardando dados do cliente" e entram no plano quando os dados chegarem.
 - Q: Qual meta de vida útil a placa alternativa (S2) deve atingir frente ao Hardox 5/8"? → A: Vida útil ≥ 1,5× a do Hardox na mesma posição **e** custo por hora de operação ≤ o do Hardox.
+- Q: Quantas unidades vão para o primeiro teste de campo de S1 e S2? → A: S1: 1 calha revestida + 1 calha igual mantida com a solução atual como comparação; S2: 2–4 chapas instaladas lado a lado com o Hardox.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -33,7 +34,7 @@ A manutenção da Concentradora 2 precisa de um revestimento para a calha de des
 
 **Why this priority**: É a única aplicação com insatisfação declarada, meta de vida útil quantificada e modos de falha conhecidos. Por isso tem a maior chance de conversão e o ganho mais claro para o cliente: menos trocas por ano.
 
-**Independent Test**: Instalar o revestimento em uma calha, em teste de campo, e medir a vida útil e o modo de falha contra a solução atual na mesma posição.
+**Independent Test**: Fornecer 1 conjunto de revestimento para 1 calha e manter 1 calha igual com a solução cerâmica atual como comparação. Medir nas duas, sob as mesmas condições, a vida útil e o modo de falha.
 
 **Acceptance Scenarios**:
 
@@ -49,7 +50,7 @@ A manutenção compra chapas de Hardox de 5/8" (16 mm), corta no local e instala
 
 **Why this priority**: O próximo passo depende só da Haver (preparar cotação). Não há desenho pendente, e o produto é simples e aplicável em vários pontos da planta. É a oportunidade mais rápida de converter.
 
-**Independent Test**: Instalar a chapa alternativa ao lado do Hardox em pelo menos uma superfície com desgaste equivalente e comparar a perda de espessura no mesmo período.
+**Independent Test**: Fornecer de 2 a 4 chapas alternativas e instalar cada uma ao lado de uma chapa Hardox 5/8" em superfícies com desgaste equivalente. Comparar a perda de espessura no mesmo período.
 
 **Acceptance Scenarios**:
 
@@ -180,11 +181,13 @@ Depois da reunião, a equipe viu no pátio um rolo de poliuretano usado como bel
 
 - **FR-101**: O revestimento MUST resistir ao mesmo tempo à abrasão da polpa e ao impacto de bolas de moinho de 3" sem desprendimento nem fratura de peças.
 - **FR-102**: O revestimento MUST manter a fixação durante toda a vida útil. Peças soltas são falha.
+- **FR-103**: O primeiro fornecimento (teste de campo) MUST ser 1 conjunto completo para 1 calha, com 1 calha igual mantida com a solução atual como comparação. O pedido em série só acontece depois da aprovação do teste contra a SC-001.
 
 **Story 2 – Placas de desgaste**
 
 - **FR-201**: A chapa MUST poder ser cortada e fixada no local com os meios que o cliente já usa, ou vir com instrução de corte e fixação.
 - **FR-202**: A chapa MUST ter vida útil ≥ 1,5× a do Hardox 5/8" na mesma posição e custo por hora de operação (preço da chapa + mão de obra de corte e instalação ÷ horas de vida) ≤ o do Hardox. Os dois critérios são obrigatórios.
+- **FR-203**: O primeiro fornecimento (teste de campo) MUST ser de 2 a 4 chapas, cada uma instalada ao lado de uma chapa Hardox de comparação em posição de desgaste equivalente.
 
 **Story 3 – Célula de flotação**
 
