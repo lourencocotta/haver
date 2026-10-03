@@ -19,6 +19,28 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Contexto do Domínio (OBRIGATÓRIO)
+
+Este projeto **nunca** entrega software como solução. Toda solução é um **produto manufaturado
+para equipamentos de mineração** (peças, componentes, conjuntos, peças de desgaste, peças de
+reposição ou equipamentos). Antes de executar este comando, leia
+`.specify/memory/constitution.md` e aplique a tabela de tradução de termos ali definida:
+este comando foi escrito originalmente para software, então "feature" = produto/componente,
+"usuário" = cliente/operador/mantenedor/OEM, "tech stack" = materiais, processos e normas,
+"testes" = inspeções e ensaios físicos, "código" = documentação técnica do produto.
+
+- Se a entrada do usuário ou um artefato propuser software, aplicativo, API, banco de dados,
+  interface de usuário ou firmware como solução, **não prossiga com essa abordagem**: sinalize a
+  violação do Princípio I e reformule como produto físico (ou pergunte ao usuário).
+- Exemplos de software neste arquivo (APIs, endpoints, `src/`, frameworks, UI) são apenas
+  ilustrativos do formato; substitua-os pelos equivalentes de engenharia e manufatura.
+- Na especificação, descreva: necessidade do cliente, equipamento hospedeiro (tipo, modelo,
+  OEM), material processado e condições de operação, requisitos de segurança e normas, e
+  critérios de sucesso mensuráveis em grandezas físicas (vida útil em horas/toneladas,
+  eficiência de peneiramento, taxa de desgaste, tempo de troca em campo, carga admissível).
+- "Agnóstico de tecnologia" aqui significa: não fixar material, processo ou fornecedor na spec;
+  esses pertencem ao plano.
+
 ## Pre-Execution Checks
 
 **Check for extension hooks (before specification)**:

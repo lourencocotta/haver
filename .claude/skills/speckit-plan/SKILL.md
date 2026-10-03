@@ -19,6 +19,31 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Contexto do Domínio (OBRIGATÓRIO)
+
+Este projeto **nunca** entrega software como solução. Toda solução é um **produto manufaturado
+para equipamentos de mineração** (peças, componentes, conjuntos, peças de desgaste, peças de
+reposição ou equipamentos). Antes de executar este comando, leia
+`.specify/memory/constitution.md` e aplique a tabela de tradução de termos ali definida:
+este comando foi escrito originalmente para software, então "feature" = produto/componente,
+"usuário" = cliente/operador/mantenedor/OEM, "tech stack" = materiais, processos e normas,
+"testes" = inspeções e ensaios físicos, "código" = documentação técnica do produto.
+
+- Se a entrada do usuário ou um artefato propuser software, aplicativo, API, banco de dados,
+  interface de usuário ou firmware como solução, **não prossiga com essa abordagem**: sinalize a
+  violação do Princípio I e reformule como produto físico (ou pergunte ao usuário).
+- Exemplos de software neste arquivo (APIs, endpoints, `src/`, frameworks, UI) são apenas
+  ilustrativos do formato; substitua-os pelos equivalentes de engenharia e manufatura.
+- No Technical Context, substitua os campos de software por: **Equipamento hospedeiro / OEM**,
+  **Materiais candidatos**, **Processos de fabricação**, **Normas aplicáveis**, **Condições de
+  operação**, **Métodos de ensaio e inspeção**, **Volume/lote de produção**, **Restrições**
+  (massa, envelope, tempo de troca, custo) e **Metas de desempenho** (vida útil, capacidade).
+- `data-model.md` = estrutura do produto (árvore de itens, BOM, materiais, massas);
+  `contracts/` = interfaces físicas (dimensões, furações, fixações, cargas transmitidas);
+  `quickstart.md` = plano de validação (protótipo, FAI, ensaios, critérios de aceitação).
+- Em "Project Structure", troque a árvore `src/`/`tests/` por uma estrutura de documentação
+  técnica do produto (ex.: `docs/produto/`, `desenhos/`, `bom/`, `processos/`, `qualidade/`).
+
 ## Pre-Execution Checks
 
 **Check for extension hooks (before planning)**:
@@ -122,8 +147,8 @@ Command ends after Phase 1 design. Report branch, IMPL_PLAN path, and generated 
    ```text
    For each unknown in Technical Context:
      Task: "Research {unknown} for {feature context}"
-   For each technology choice:
-     Task: "Find best practices for {tech} in {domain}"
+   For each material/process choice:
+     Task: "Find best practices for {material/process} in {mining application}"
    ```
 
 3. **Consolidate findings** in `research.md` using format:
@@ -137,22 +162,22 @@ Command ends after Phase 1 design. Report branch, IMPL_PLAN path, and generated 
 
 **Prerequisites:** `research.md` complete
 
-1. **Extract entities from feature spec** → `data-model.md`:
-   - Entity name, fields, relationships
+1. **Extract product structure from feature spec** → `data-model.md`:
+   - Items/components, materials, masses, quantities, assembly relationships (BOM tree)
    - Validation rules from requirements
    - State transitions if applicable
 
-2. **Define interface contracts** (if project has external interfaces) → `/contracts/`:
-   - Identify what interfaces the project exposes to users or other systems
-   - Document the contract format appropriate for the project type
-   - Examples: public APIs for libraries, command schemas for CLI tools, endpoints for web services, grammars for parsers, UI contracts for applications
-   - Skip if project is purely internal (build scripts, one-off tools, etc.)
+2. **Define physical interface contracts** → `/contracts/`:
+   - Identify the interfaces of the product with the host mining equipment and between its components
+   - Document dimensions, envelope, hole patterns, fastening/locking systems, fits and tolerances, transmitted loads and mass limits
+   - Examples: screen deck mounting interface, liner bolt pattern, chute/hopper flange, lifting points
+   - Reference the OEM drawing or field survey that each interface is based on
 
 3. **Create quickstart validation guide** → `quickstart.md`:
-   - Document runnable validation scenarios that prove the feature works end-to-end
-   - Include prerequisites, setup commands, test/run commands, and expected outcomes
+   - Document physical validation scenarios that prove the product works end-to-end (FAI, bench test, field trial)
+   - Include prerequisites, required instruments/fixtures, inspection/test procedures, and acceptance criteria
    - Use links or references to contracts and data model details instead of duplicating them
-   - Do not include full implementation code, model/service/controller bodies, migrations, or complete test suites
+   - Do not include full drawings, complete BOMs or full manufacturing routes
    - Keep this artifact as a validation/run guide; implementation details belong in `tasks.md` and the implementation phase
 
 **Output**: data-model.md, /contracts/*, quickstart.md
