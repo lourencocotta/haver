@@ -23,6 +23,7 @@ Conforme a constituição, materiais, processos e fornecedores **não são fixad
 - Q: O plano e as tarefas devem cobrir as 8 aplicações ou só as P1? → A: Plano detalhado só das P1 (S1 calha de descarga + S2 placas de desgaste); S3–S8 permanecem na spec como "aguardando dados do cliente" e entram no plano quando os dados chegarem.
 - Q: Qual meta de vida útil a placa alternativa (S2) deve atingir frente ao Hardox 5/8"? → A: Vida útil ≥ 1,5× a do Hardox na mesma posição **e** custo por hora de operação ≤ o do Hardox.
 - Q: Quantas unidades vão para o primeiro teste de campo de S1 e S2? → A: S1: 1 calha revestida + 1 calha igual mantida com a solução atual como comparação; S2: 2–4 chapas instaladas lado a lado com o Hardox.
+- Q: Quando termina a avaliação do teste de S2? → A: Quando o Hardox de comparação atinge a espessura de troca; nesse momento mede-se a espessura remanescente da chapa alternativa e projeta-se a vida útil pela taxa de desgaste.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -55,7 +56,7 @@ A manutenção compra chapas de Hardox de 5/8" (16 mm), corta no local e instala
 **Acceptance Scenarios**:
 
 1. **Given** uma chapa fornecida em dimensões padrão, **When** a manutenção corta e fixa a chapa com os meios disponíveis no local, **Then** a instalação não precisa de ferramenta especial ou deve vir acompanhada de instrução que a dispense.
-2. **Given** chapas Hardox e alternativas instaladas lado a lado, **When** termina o período de avaliação combinado, **Then** a vida útil projetada da alternativa é ≥ 1,5× a do Hardox e o custo por hora de operação é ≤ o do Hardox.
+2. **Given** chapas Hardox e alternativas instaladas lado a lado, **When** a chapa Hardox de comparação atinge a espessura de troca e a espessura remanescente da alternativa é medida nos mesmos pontos, **Then** a vida útil projetada da alternativa (espessura útil inicial ÷ taxa de desgaste medida) é ≥ 1,5× a do Hardox e o custo por hora de operação é ≤ o do Hardox.
 3. **Given** a aplicação de uma chapa mais espessa (1" contra 5/8"), **When** é instalada, **Then** a folga, a massa e a fixação continuam compatíveis com o equipamento hospedeiro.
 
 ---
@@ -188,6 +189,7 @@ Depois da reunião, a equipe viu no pátio um rolo de poliuretano usado como bel
 - **FR-201**: A chapa MUST poder ser cortada e fixada no local com os meios que o cliente já usa, ou vir com instrução de corte e fixação.
 - **FR-202**: A chapa MUST ter vida útil ≥ 1,5× a do Hardox 5/8" na mesma posição e custo por hora de operação (preço da chapa + mão de obra de corte e instalação ÷ horas de vida) ≤ o do Hardox. Os dois critérios são obrigatórios.
 - **FR-203**: O primeiro fornecimento (teste de campo) MUST ser de 2 a 4 chapas, cada uma instalada ao lado de uma chapa Hardox de comparação em posição de desgaste equivalente.
+- **FR-204**: A avaliação do teste MUST terminar quando a chapa Hardox de comparação atingir a espessura de troca. A espessura remanescente da chapa alternativa MUST ser medida nos mesmos pontos e a vida útil MUST ser projetada pela taxa de desgaste (perda de espessura ÷ horas de operação). Também MUST haver uma espessura de referência no início do teste, medida nos mesmos pontos.
 
 **Story 3 – Célula de flotação**
 
