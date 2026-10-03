@@ -19,6 +19,28 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Contexto do Domínio (OBRIGATÓRIO)
+
+Este projeto **nunca** entrega software como solução. Toda solução é um **produto manufaturado
+para equipamentos de mineração** (peças, componentes, conjuntos, peças de desgaste, peças de
+reposição ou equipamentos). Antes de executar este comando, leia
+`.specify/memory/constitution.md` e aplique a tabela de tradução de termos ali definida:
+este comando foi escrito originalmente para software, então "feature" = produto/componente,
+"usuário" = cliente/operador/mantenedor/OEM, "tech stack" = materiais, processos e normas,
+"testes" = inspeções e ensaios físicos, "código" = documentação técnica do produto.
+
+- Se a entrada do usuário ou um artefato propuser software, aplicativo, API, banco de dados,
+  interface de usuário ou firmware como solução, **não prossiga com essa abordagem**: sinalize a
+  violação do Princípio I e reformule como produto físico (ou pergunte ao usuário).
+- Exemplos de software neste arquivo (APIs, endpoints, `src/`, frameworks, UI) são apenas
+  ilustrativos do formato; substitua-os pelos equivalentes de engenharia e manufatura.
+- "Implementar" significa produzir no repositório a documentação de engenharia e manufatura
+  definida em `tasks.md`. Não escreva código de aplicação nem crie arquivos de configuração de
+  software.
+- Tarefas físicas (fabricar, ensaiar, instalar em campo) não podem ser executadas pelo agente:
+  prepare os documentos necessários, marque a tarefa como pendente de execução humana e informe
+  ao usuário qual evidência é necessária para fechá-la.
+
 ## Pre-Execution Checks
 
 **Check for extension hooks (before implementation)**:
@@ -102,52 +124,15 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **IF EXISTS**: Read .specify/memory/constitution.md for governance constraints
    - **IF EXISTS**: Read quickstart.md for integration scenarios
 
-4. **Project Setup Verification**:
-   - **REQUIRED**: Create/verify ignore files based on actual project setup:
-
-   **Detection & Creation Logic**:
-   - Check if the following command succeeds to determine if the repository is a git repo (create/verify .gitignore if so):
-
-     ```sh
-     git rev-parse --git-dir 2>/dev/null
-     ```
-
-   - Check if Dockerfile* exists or Docker in plan.md → create/verify .dockerignore
-   - Check if .eslintrc* exists → create/verify .eslintignore
-   - Check if eslint.config.* exists → ensure the config's `ignores` entries cover required patterns
-   - Check if .prettierrc* exists → create/verify .prettierignore
-   - Check if .npmrc or package.json exists → create/verify .npmignore (if publishing)
-   - Check if terraform files (*.tf) exist → create/verify .terraformignore
-   - Check if .helmignore needed (helm charts present) → create/verify .helmignore
-
-   **If ignore file already exists**: Verify it contains essential patterns, append missing critical patterns only
-   **If ignore file missing**: Create with full pattern set for detected technology
-
-   **Common Patterns by Technology** (from plan.md tech stack):
-   - **Node.js/JavaScript/TypeScript**: `node_modules/`, `dist/`, `build/`, `*.log`, `.env*`
-   - **Python**: `__pycache__/`, `*.pyc`, `.venv/`, `venv/`, `dist/`, `*.egg-info/`
-   - **Java**: `target/`, `*.class`, `*.jar`, `.gradle/`, `build/`
-   - **C#/.NET**: `bin/`, `obj/`, `*.user`, `*.suo`, `packages/`
-   - **Go**: `*.exe`, `*.test`, `vendor/`, `*.out`
-   - **Ruby**: `.bundle/`, `log/`, `tmp/`, `*.gem`, `vendor/bundle/`
-   - **PHP**: `vendor/`, `*.log`, `*.cache`, `*.env`
-   - **Rust**: `target/`, `debug/`, `release/`, `*.rs.bk`, `*.rlib`, `*.prof*`, `.idea/`, `*.log`, `.env*`
-   - **Kotlin**: `build/`, `out/`, `.gradle/`, `.idea/`, `*.class`, `*.jar`, `*.iml`, `*.log`, `.env*`
-   - **C++**: `build/`, `bin/`, `obj/`, `out/`, `*.o`, `*.so`, `*.a`, `*.exe`, `*.dll`, `.idea/`, `*.log`, `.env*`
-   - **C**: `build/`, `bin/`, `obj/`, `out/`, `*.o`, `*.a`, `*.so`, `*.exe`, `*.dll`, `autom4te.cache/`, `config.status`, `config.log`, `.idea/`, `*.log`, `.env*`
-   - **Swift**: `.build/`, `DerivedData/`, `*.swiftpm/`, `Packages/`
-   - **R**: `.Rproj.user/`, `.Rhistory`, `.RData`, `.Ruserdata`, `*.Rproj`, `packrat/`, `renv/`
-   - **Universal**: `.DS_Store`, `Thumbs.db`, `*.tmp`, `*.swp`, `.vscode/`, `.idea/`
-
-   **Tool-Specific Patterns**:
-   - **Docker**: `node_modules/`, `.git/`, `Dockerfile*`, `.dockerignore`, `*.log*`, `.env*`, `coverage/`
-   - **ESLint**: `node_modules/`, `dist/`, `build/`, `coverage/`, `*.min.js`
-   - **Prettier**: `node_modules/`, `dist/`, `build/`, `coverage/`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`
-   - **Terraform**: `.terraform/`, `*.tfstate*`, `*.tfvars`, `.terraform.lock.hcl`
-   - **Kubernetes/k8s**: `*.secret.yaml`, `secrets/`, `.kube/`, `kubeconfig*`, `*.key`, `*.crt`
+4. **Project Setup Verification** (documentação técnica do produto):
+   - Verifique/crie a estrutura de documentação definida em plan.md (ex.: `docs/produto/`,
+     `desenhos/`, `bom/`, `processos/`, `qualidade/`, `qualidade/registros/`).
+   - Se o repositório for git, garanta que `.gitignore` exclua arquivos temporários de CAD/CAE e
+     do sistema operacional (ex.: `*.bak`, `*.tmp`, `~$*`, `*.lck`, `.DS_Store`, `Thumbs.db`).
+   - NÃO crie arquivos de configuração de software (Docker, ESLint, npm, Terraform, etc.).
 
 5. Parse tasks.md structure and extract:
-   - **Task phases**: Setup, Tests, Core, Integration, Polish
+   - **Task phases**: Setup, Foundational, histórias do cliente (produto), Polish
    - **Task dependencies**: Sequential vs parallel execution rules
    - **Task details**: ID, description, file paths, parallel markers [P]
    - **Execution flow**: Order and dependency requirements
@@ -155,16 +140,16 @@ You **MUST** consider the user input before proceeding (if not empty).
 6. Execute implementation following the task plan:
    - **Phase-by-phase execution**: Complete each phase before moving to the next
    - **Respect dependencies**: Run sequential tasks in order, parallel tasks [P] can run together
-   - **Follow TDD approach**: Execute test tasks before their corresponding implementation tasks
+   - **Verificação primeiro**: defina critérios de inspeção/ensaio antes dos documentos de projeto que eles verificam
    - **File-based coordination**: Tasks affecting the same files must run sequentially
    - **Validation checkpoints**: Verify each phase completion before proceeding
 
 7. Implementation execution rules:
-   - **Setup first**: Initialize project structure, dependencies, configuration
-   - **Tests before code**: If you need to write tests for contracts, entities, and integration scenarios
-   - **Core development**: Implement models, services, CLI commands, endpoints
-   - **Integration work**: Database connections, middleware, logging, external services
-   - **Polish and validation**: Unit tests, performance optimization, documentation
+   - **Setup first**: estrutura de documentação, normas de referência, dados do equipamento hospedeiro
+   - **Critérios de verificação**: planos de inspeção e ensaio derivados dos critérios de aceitação
+   - **Projeto do produto**: estrutura/BOM, memoriais de cálculo, especificações de material, desenhos
+   - **Manufatura**: roteiros de fabricação, plano de controle, FMEA de processo, instruções de montagem
+   - **Validação e liberação**: protótipo/FAI, registros de ensaio (execução humana), manuais e catálogo de peças
 
 8. Progress tracking and error handling:
    - Report progress after each completed task
@@ -177,7 +162,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 9. Completion validation:
    - Verify all required tasks are completed
    - Check that implemented features match the original specification
-   - Validate that tests pass and coverage meets requirements
+   - Verify that every acceptance criterion has an inspection/test method and, for executed physical tasks, recorded evidence
    - Confirm the implementation follows the technical plan
 
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/speckit-tasks` first to regenerate the task list.
@@ -224,6 +209,6 @@ Report final status with summary of completed work.
 ## Done When
 
 - [ ] All tasks in tasks.md completed and marked `[X]`
-- [ ] Implementation validated against specification, plan, and test coverage
+- [ ] Documentação validada contra especificação, plano e critérios de inspeção/ensaio; tarefas físicas pendentes listadas com a evidência necessária
 - [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
 - [ ] Completion reported to user with summary of completed work

@@ -19,6 +19,25 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Contexto do Domínio (OBRIGATÓRIO)
+
+Este projeto **nunca** entrega software como solução. Toda solução é um **produto manufaturado
+para equipamentos de mineração** (peças, componentes, conjuntos, peças de desgaste, peças de
+reposição ou equipamentos). Antes de executar este comando, leia
+`.specify/memory/constitution.md` e aplique a tabela de tradução de termos ali definida:
+este comando foi escrito originalmente para software, então "feature" = produto/componente,
+"usuário" = cliente/operador/mantenedor/OEM, "tech stack" = materiais, processos e normas,
+"testes" = inspeções e ensaios físicos, "código" = documentação técnica do produto.
+
+- Se a entrada do usuário ou um artefato propuser software, aplicativo, API, banco de dados,
+  interface de usuário ou firmware como solução, **não prossiga com essa abordagem**: sinalize a
+  violação do Princípio I e reformule como produto físico (ou pergunte ao usuário).
+- Exemplos de software neste arquivo (APIs, endpoints, `src/`, frameworks, UI) são apenas
+  ilustrativos do formato; substitua-os pelos equivalentes de engenharia e manufatura.
+- Ao emendar a constituição, preserve o Princípio I (produto manufaturado, nunca software) e a
+  tabela de tradução de termos; removê-los ou enfraquecê-los exige decisão explícita do usuário
+  e bump MAJOR.
+
 ## Scope Guard
 
 This command's own work is limited to updating the project constitution itself. Dependent templates
