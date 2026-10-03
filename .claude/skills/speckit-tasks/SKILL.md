@@ -19,6 +19,31 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Contexto do Domínio (OBRIGATÓRIO)
+
+Este projeto **nunca** entrega software como solução. Toda solução é um **produto manufaturado
+para equipamentos de mineração** (peças, componentes, conjuntos, peças de desgaste, peças de
+reposição ou equipamentos). Antes de executar este comando, leia
+`.specify/memory/constitution.md` e aplique a tabela de tradução de termos ali definida:
+este comando foi escrito originalmente para software, então "feature" = produto/componente,
+"usuário" = cliente/operador/mantenedor/OEM, "tech stack" = materiais, processos e normas,
+"testes" = inspeções e ensaios físicos, "código" = documentação técnica do produto.
+
+- Se a entrada do usuário ou um artefato propuser software, aplicativo, API, banco de dados,
+  interface de usuário ou firmware como solução, **não prossiga com essa abordagem**: sinalize a
+  violação do Princípio I e reformule como produto físico (ou pergunte ao usuário).
+- Exemplos de software neste arquivo (APIs, endpoints, `src/`, frameworks, UI) são apenas
+  ilustrativos do formato; substitua-os pelos equivalentes de engenharia e manufatura.
+- Tarefas descrevem atividades de engenharia e manufatura: cálculo/simulação, desenhos, BOM,
+  especificação de material, roteiro de fabricação, plano de controle, FMEA, compra de matéria-
+  prima, fabricação de protótipo, inspeção, ensaio, ajuste e liberação.
+- O "caminho de arquivo" de cada tarefa é o documento técnico que ela produz ou atualiza
+  (ex.: `docs/produto/bom.csv`, `qualidade/plano-de-inspecao.md`). Tarefas físicas que só uma
+  pessoa pode executar (fabricar, ensaiar, instalar) MUST indicar o registro de evidência
+  esperado (ex.: `qualidade/registros/fai-prototipo-01.md`).
+- Ordem típica dentro de uma história: critérios de verificação → estrutura do produto →
+  desenhos/especificações → processo de fabricação → protótipo e ensaio.
+
 ## Pre-Execution Checks
 
 **Check for extension hooks (before tasks generation)**:
@@ -168,9 +193,10 @@ Every task MUST strictly follow this format:
 **Examples**:
 
 - ✅ CORRECT: `- [ ] T001 Create project structure per implementation plan`
-- ✅ CORRECT: `- [ ] T005 [P] Implement authentication middleware in src/middleware/auth.py`
-- ✅ CORRECT: `- [ ] T012 [P] [US1] Create User model in src/models/user.py`
-- ✅ CORRECT: `- [ ] T014 [US1] Implement UserService in src/services/user_service.py`
+- ✅ CORRECT: `- [ ] T005 [P] Compile host-equipment interface data in docs/produto/interfaces-equipamento.md`
+- ✅ CORRECT: `- [ ] T012 [P] [US1] Create screen-panel BOM in bom/painel-tela.csv`
+- ✅ CORRECT: `- [ ] T014 [US1] Write welding and heat-treatment route in processos/roteiro-painel.md`
+- ✅ CORRECT: `- [ ] T020 [US1] Fabricate and inspect prototype (human) — evidence in qualidade/registros/fai-painel-01.md`
 - ❌ WRONG: `- [ ] Create User model` (missing ID and Story label)
 - ❌ WRONG: `T001 [US1] Create model` (missing checkbox)
 - ❌ WRONG: `- [ ] [US1] Create User model` (missing Task ID)
@@ -181,20 +207,20 @@ Every task MUST strictly follow this format:
 1. **From User Stories (spec.md)** - PRIMARY ORGANIZATION:
    - Each user story (P1, P2, P3...) gets its own phase
    - Map all related components to their story:
-     - Models needed for that story
-     - Services needed for that story
-     - Interfaces/UI needed for that story
-     - If tests requested: Tests specific to that story
+     - Product structure / BOM items needed for that story
+     - Calculations, drawings and material specifications needed for that story
+     - Physical interfaces with the host equipment needed for that story
+     - Manufacturing routes, inspection and test activities specific to that story
    - Mark story dependencies (most stories should be independent)
 
 2. **From Contracts**:
    - Map each interface contract → to the user story it serves
-   - If tests requested: Each interface contract → contract test task [P] before implementation in that story's phase
+   - Each interface contract → dimensional/fit verification task [P] in that story's phase
 
 3. **From Data Model**:
    - Map each entity to the user story(ies) that need it
    - If entity serves multiple stories: Put in earliest story or Setup phase
-   - Relationships → service layer tasks in appropriate story phase
+   - Relationships (assembly hierarchy) → assembly drawing/instruction tasks in appropriate story phase
    - For each field with constraints in data-model.md (max length, nullable/required, enum values, validation rules), quote the constraint verbatim in the task description so it is not left to implementation-time discretion
 
 4. **From Setup/Infrastructure**:
@@ -207,7 +233,7 @@ Every task MUST strictly follow this format:
 - **Phase 1**: Setup (project initialization)
 - **Phase 2**: Foundational (blocking prerequisites - MUST complete before user stories)
 - **Phase 3+**: User Stories in priority order (P1, P2, P3...)
-  - Within each story: Tests (if requested) → Models → Services → Endpoints → Integration
+  - Within each story: Verification criteria → Product structure/BOM → Calculations & drawings → Manufacturing process → Prototype & tests
   - Each phase should be a complete, independently testable increment
 - **Final Phase**: Polish & Cross-Cutting Concerns
 
