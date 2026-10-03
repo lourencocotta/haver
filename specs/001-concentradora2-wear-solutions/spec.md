@@ -24,6 +24,7 @@ Conforme a constituição, materiais, processos e fornecedores **não são fixad
 - Q: Qual meta de vida útil a placa alternativa (S2) deve atingir frente ao Hardox 5/8"? → A: Vida útil ≥ 1,5× a do Hardox na mesma posição **e** custo por hora de operação ≤ o do Hardox.
 - Q: Quantas unidades vão para o primeiro teste de campo de S1 e S2? → A: S1: 1 calha revestida + 1 calha igual mantida com a solução atual como comparação; S2: 2–4 chapas instaladas lado a lado com o Hardox.
 - Q: Quando termina a avaliação do teste de S2? → A: Quando o Hardox de comparação atinge a espessura de troca; nesse momento mede-se a espessura remanescente da chapa alternativa e projeta-se a vida útil pela taxa de desgaste.
+- Q: Como medir a meta de >12 meses da calha de descarga (S1)? → A: Critério duplo: ≥ 12 meses de operação no regime normal **e** ≥ 1,5× a vida da calha de comparação com a solução atual, nas mesmas condições.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -40,7 +41,7 @@ A manutenção da Concentradora 2 precisa de um revestimento para a calha de des
 **Acceptance Scenarios**:
 
 1. **Given** as fotos e os desenhos da calha enviados pelo cliente, **When** a Engenharia confirma as dimensões e a fixação, **Then** o revestimento encaixa na calha existente sem modificar a estrutura hospedeira.
-2. **Given** o revestimento instalado e a operação normal (polpa abrasiva + bolas de 3"), **When** se completam 12 meses, **Then** nenhuma peça se soltou ou quebrou e a espessura remanescente nos pontos críticos fica acima do mínimo de troca.
+2. **Given** o revestimento instalado e a operação normal (polpa abrasiva + bolas de 3"), **When** se completam 12 meses de operação no regime normal, **Then** nenhuma peça se soltou ou quebrou, a espessura remanescente nos pontos críticos fica acima do mínimo de troca e a vida útil (real ou projetada) é ≥ 1,5× a da calha de comparação.
 3. **Given** a necessidade de troca, **When** a equipe de manutenção do cliente substitui o revestimento, **Then** a troca é feita na parada programada, com ferramentas convencionais e sem corte ou solda no equipamento.
 
 ---
@@ -183,6 +184,7 @@ Depois da reunião, a equipe viu no pátio um rolo de poliuretano usado como bel
 - **FR-101**: O revestimento MUST resistir ao mesmo tempo à abrasão da polpa e ao impacto de bolas de moinho de 3" sem desprendimento nem fratura de peças.
 - **FR-102**: O revestimento MUST manter a fixação durante toda a vida útil. Peças soltas são falha.
 - **FR-103**: O primeiro fornecimento (teste de campo) MUST ser 1 conjunto completo para 1 calha, com 1 calha igual mantida com a solução atual como comparação. O pedido em série só acontece depois da aprovação do teste contra a SC-001.
+- **FR-104**: A aprovação do S1 MUST cumprir os dois critérios: (a) ≥ 12 meses de operação no regime normal da planta (paradas longas não contam) e (b) vida útil ≥ 1,5× a da calha de comparação com a solução atual, nas mesmas condições.
 
 **Story 2 – Placas de desgaste**
 
@@ -240,7 +242,7 @@ Todo item vem com desenho, especificação de material, critério de troca, inst
 
 ### Measurable Outcomes
 
-- **SC-001** (S1): O revestimento da calha de descarga alcança **≥ 12 meses** de operação, contra ~8 meses hoje (+50%), sem peças soltas ou quebradas.
+- **SC-001** (S1): O revestimento da calha de descarga alcança **≥ 12 meses** de operação no regime normal **e** **≥ 1,5×** a vida útil da calha de comparação com a solução atual (~8 meses hoje), sem peças soltas ou quebradas.
 - **SC-002** (S2): A placa de desgaste alternativa tem vida útil pelo menos **1,5 vez** a do Hardox 5/8" na mesma posição, com **custo por hora de operação** igual ou menor.
 - **SC-003** (S3): O kit da célula de flotação é instalado na primeira tentativa com **0 peças** precisando de ajuste em campo.
 - **SC-004** (S4): A peça magnética é instalada em **≤ 15 minutos** por no máximo 2 pessoas, sem parar o equipamento, e fica fixa até a parada programada (referência **30 dias**).
@@ -254,7 +256,7 @@ Todo item vem com desenho, especificação de material, critério de troca, inst
 ## Assumptions
 
 - **Escopo**: um único programa de produtos para a Concentradora 2, com 8 user stories independentes. **Nesta fase, o plano e as tarefas cobrem só as P1 (S1 e S2).** S3–S8 ficam com status "aguardando dados do cliente" e entram no plano (ou viram specs próprias) quando os desenhos, as dimensões ou a confirmação de equivalência chegarem.
-- **Vida útil** é medida em horas efetivas de operação ou em toneladas processadas. Quando o cliente só souber em meses de calendário (story 1), vale o regime de operação atual.
+- **Vida útil** é medida em horas efetivas de operação ou em toneladas processadas. Na story 1, os meses contam como meses de operação no regime normal da planta, e a calha de comparação serve de referência para descontar variações de carga e de minério.
 - **Metas sem número no resumo** foram definidas por mim e devem ser confirmadas com o cliente: S4 15 min / 30 dias; S7 ×1,25; S10 3 de 8 em 6 meses.
 - **Condições de operação** (minério, granulometria, % de sólidos, vazões, pressões, temperatura) ainda não foram informadas e dependem dos desenhos e dados que o cliente vai enviar.
 - **Normas**: a planta fica no México. Valem as normas mexicanas de segurança (STPS) e os requisitos do Grupo México. As normas ABNT/NR da constituição servem de referência de boas práticas.
